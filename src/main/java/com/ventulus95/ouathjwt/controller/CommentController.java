@@ -17,7 +17,6 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
-    private final UserRepository userRepository;
 
     @GetMapping("/api/v1/posts/{id}/comment")
     public List<CommentResponseDto> getPostByComment(@PathVariable Long id){
