@@ -1,5 +1,6 @@
 package com.ventulus95.ouathjwt.controller;
 
+import com.ventulus95.ouathjwt.dto.artwork.ArtworkListResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkUpadteRequestDto;
@@ -11,33 +12,50 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1/artwork")
 public class ArtworkApiController {
 
     private final ArtworkService artworkService;
     private final S3Service s3Service;
 
-    @PostMapping("/api/v1/posts")
+    @GetMapping("/random")
+    public List<ArtworkListResponseDto> ListArtworkRadom(){
+        return artworkService.findAllRandom();
+    }
+
+    @GetMapping("/format")
+    public List<ArtworkListResponseDto> ListArtwork(){
+        return artworkService.findAllFormat();
+    }
+
+    @GetMapping("/gen")
+    public List<ArtworkListResponseDto> ListGeneration(){
+        return artworkService.findAllGen();
+    }
+
+    @PostMapping("/")
     public Long save(ArtworkSaveRequestDto dto, @CurrentUser UserPrincipal user) throws IOException {
         String imgpath  = s3Service.upload(dto.getFile());
         dto.setFilePath(imgpath);
         return artworkService.save(dto, user);
     }
 
-    @PutMapping("/api/v1/posts/{id}")
+    @PutMapping("/{id}")
     public Long update(@PathVariable Long id, @RequestBody ArtworkUpadteRequestDto dto ){
         return artworkService.update(id, dto);
     }
 
-    @GetMapping("/api/v1/posts/{id}")
+    @GetMapping("/{id}")
     public ArtworkResponseDto findById(@PathVariable Long id, @CurrentUser UserPrincipal user){
         return artworkService.findById(id);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
-    public Long postDelete(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public Long artworkDelete(@PathVariable Long id){
         artworkService.delete(id);
         return id;
     }

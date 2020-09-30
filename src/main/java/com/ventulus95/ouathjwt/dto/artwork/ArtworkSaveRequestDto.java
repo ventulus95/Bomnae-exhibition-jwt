@@ -15,17 +15,23 @@ public class ArtworkSaveRequestDto {
     private String title;
     private String content;
     private User user;
+    private String artist;
+    private int generation;
+    private String format;
     private MultipartFile file;
     private String filePath;
 
 
     @Builder
-    public ArtworkSaveRequestDto(String title, String content, User user, MultipartFile file, String filePath){
+    public ArtworkSaveRequestDto(String title, String content, User user, MultipartFile file, String filePath, String artist, int generation, String format){
         this.title = title;
         this.content = content;
         this.user = user;
         this.file = file;
         this.filePath = filePath;
+        this.artist = artist;
+        this.generation = generation;
+        this.format = format;
     }
 
     public Artwork toEntity(){
@@ -34,6 +40,9 @@ public class ArtworkSaveRequestDto {
                 .content(content)
                 .user(user)
                 .filePath(filePath)
+                .artist(artist)
+                .generation(generation)
+                .format(format)
                 .build();
     }
 }

@@ -44,8 +44,22 @@ public class ArtworkService {
     }
 
     @Transactional(readOnly = true)
-    public List<ArtworkListResponseDto> findAllDesc(){
-        return artworkRepository.findAll().stream()
+    public List<ArtworkListResponseDto> findAllRandom(){
+        return artworkRepository.findAllByAOrderByRandom().stream()
+                .map(ArtworkListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ArtworkListResponseDto> findAllFormat(){
+        return artworkRepository.findAllByOrderByFormat().stream()
+                .map(ArtworkListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ArtworkListResponseDto> findAllGen(){
+        return artworkRepository.findAllByOrderByGeneration().stream()
                 .map(ArtworkListResponseDto::new)
                 .collect(Collectors.toList());
     }
