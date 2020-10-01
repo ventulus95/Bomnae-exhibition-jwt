@@ -20,7 +20,7 @@ public class GuestbookController {
 
     private final GuestbookService guestbookService;
 
-    @GetMapping("/gusetbook-list")
+    @GetMapping("/guestbook-list")
     public List<GuestbookResponseDto> getPostByComment(){
         return guestbookService.findAllDesc();
     }
