@@ -9,6 +9,7 @@ import com.ventulus95.ouathjwt.security.UserPrincipal;
 import com.ventulus95.ouathjwt.service.artwork.ArtworkService;
 import com.ventulus95.ouathjwt.service.upload.S3Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class ArtworkApiController {
         return artworkService.findAllGen();
     }
 
+    @PostAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public Long save(ArtworkSaveRequestDto dto, @CurrentUser UserPrincipal user) throws IOException {
         String imgpath  = s3Service.upload(dto.getFile());
@@ -44,6 +46,7 @@ public class ArtworkApiController {
         return artworkService.save(dto, user);
     }
 
+    @PostAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Long update(@PathVariable Long id, @RequestBody ArtworkUpadteRequestDto dto ){
         return artworkService.update(id, dto);
@@ -54,6 +57,7 @@ public class ArtworkApiController {
         return artworkService.findById(id);
     }
 
+    @PostAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public Long artworkDelete(@PathVariable Long id){
         artworkService.delete(id);

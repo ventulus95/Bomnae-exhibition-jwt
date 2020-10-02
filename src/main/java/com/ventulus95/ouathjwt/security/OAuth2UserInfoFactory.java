@@ -1,7 +1,7 @@
 package com.ventulus95.ouathjwt.security;
 
 import com.ventulus95.ouathjwt.exception.OAuth2AuthenticationProcessingException;
-import com.ventulus95.ouathjwt.model.AuthProvider;
+import com.ventulus95.ouathjwt.model.user.AuthProvider;
 
 import java.util.Map;
 

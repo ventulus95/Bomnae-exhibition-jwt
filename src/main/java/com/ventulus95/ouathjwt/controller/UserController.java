@@ -1,7 +1,7 @@
 package com.ventulus95.ouathjwt.controller;
 
 import com.ventulus95.ouathjwt.exception.ResourceNotFoundException;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.repository.UserRepository;
 import com.ventulus95.ouathjwt.security.CurrentUser;
 import com.ventulus95.ouathjwt.security.UserPrincipal;

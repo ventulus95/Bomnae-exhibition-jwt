@@ -1,8 +1,8 @@
 package com.ventulus95.ouathjwt.security;
 
 import com.ventulus95.ouathjwt.exception.OAuth2AuthenticationProcessingException;
-import com.ventulus95.ouathjwt.model.AuthProvider;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.AuthProvider;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

@@ -1,8 +1,8 @@
 package com.ventulus95.ouathjwt.controller;
 
 import com.ventulus95.ouathjwt.exception.BadRequestException;
-import com.ventulus95.ouathjwt.model.AuthProvider;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.AuthProvider;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.payload.ApiResponse;
 import com.ventulus95.ouathjwt.payload.AuthResponse;
 import com.ventulus95.ouathjwt.payload.LoginRequest;
@@ -78,5 +78,6 @@ public class AuthController {
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));
     }
+
 
 }

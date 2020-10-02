@@ -1,6 +1,6 @@
 package com.ventulus95.ouathjwt.dto.comment;
 
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.comment.Comment;
 import lombok.Getter;
 

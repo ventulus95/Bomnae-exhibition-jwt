@@ -1,7 +1,7 @@
 package com.ventulus95.ouathjwt.model.artwork;
 
 import com.ventulus95.ouathjwt.model.BaseTimeEntity;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

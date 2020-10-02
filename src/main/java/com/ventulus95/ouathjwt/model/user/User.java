@@ -1,4 +1,4 @@
-package com.ventulus95.ouathjwt.model;
+package com.ventulus95.ouathjwt.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

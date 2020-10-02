@@ -1,7 +1,7 @@
 package com.ventulus95.ouathjwt.service;
 
 import com.ventulus95.ouathjwt.exception.ResourceNotFoundException;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.repository.UserRepository;
 import com.ventulus95.ouathjwt.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
         );
-
+        if(email.equals("admin@bomnae.net")){
+            return UserPrincipal.createAdmin(user);
+        }
         return UserPrincipal.create(user);
     }
 
@@ -34,7 +36,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("User", "id", id)
         );
+        if(id==1){
+            return UserPrincipal.createAdmin(user);
+        }
 
         return UserPrincipal.create(user);
     }
+
 }

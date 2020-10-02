@@ -1,6 +1,6 @@
 package com.ventulus95.ouathjwt.dto.gusetbook;
 
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.guestbook.Guestbook;
 import lombok.Getter;
 

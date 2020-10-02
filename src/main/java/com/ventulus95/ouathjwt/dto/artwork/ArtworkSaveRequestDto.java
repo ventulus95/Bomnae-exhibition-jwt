@@ -1,6 +1,6 @@
 package com.ventulus95.ouathjwt.dto.artwork;
 
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.artwork.Artwork;
 import lombok.Builder;
 import lombok.Getter;

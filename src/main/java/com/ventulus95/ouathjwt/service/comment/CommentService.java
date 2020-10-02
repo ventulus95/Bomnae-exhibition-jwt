@@ -2,7 +2,7 @@ package com.ventulus95.ouathjwt.service.comment;
 
 import com.ventulus95.ouathjwt.dto.comment.CommentResponseDto;
 import com.ventulus95.ouathjwt.dto.comment.CommentSaveDto;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.artwork.Artwork;
 import com.ventulus95.ouathjwt.model.artwork.ArtworkRepository;
 import com.ventulus95.ouathjwt.model.comment.CommentRepository;

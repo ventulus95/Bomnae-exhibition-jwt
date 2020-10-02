@@ -4,7 +4,7 @@ import com.ventulus95.ouathjwt.dto.artwork.ArtworkListResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkUpadteRequestDto;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.artwork.Artwork;
 import com.ventulus95.ouathjwt.model.artwork.ArtworkRepository;
 import com.ventulus95.ouathjwt.repository.UserRepository;

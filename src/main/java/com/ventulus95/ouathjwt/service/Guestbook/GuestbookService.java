@@ -2,7 +2,7 @@ package com.ventulus95.ouathjwt.service.Guestbook;
 
 import com.ventulus95.ouathjwt.dto.gusetbook.GuestBookSaveDto;
 import com.ventulus95.ouathjwt.dto.gusetbook.GuestbookResponseDto;
-import com.ventulus95.ouathjwt.model.User;
+import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.guestbook.GuestbookRepository;
 import com.ventulus95.ouathjwt.repository.UserRepository;
 import com.ventulus95.ouathjwt.security.CurrentUser;
