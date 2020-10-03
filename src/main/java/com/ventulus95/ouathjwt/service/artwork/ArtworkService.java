@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,7 +36,7 @@ public class ArtworkService {
     @Transactional
     public Long update(Long id, ArtworkUpadteRequestDto dto) {
         Artwork artwork = artworkRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id ="+id));
-        artwork.update(dto.getTitle(), dto.getContent(), dto.getTitle());
+        artwork.update(dto.getTitle(), dto.getContent(), dto.getFilePath(), dto.getArtist(), dto.getGeneration(), dto.getFormat());
         return id;
     }
 
@@ -65,9 +67,13 @@ public class ArtworkService {
     }
 
     @Transactional
-    public void delete(Long id){
+    public String delete(Long id) throws UnsupportedEncodingException {
+        Artwork artwork = artworkRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id ="+id));
+        String filePath = artwork.getFilePath();
+        filePath = filePath.replace("https://bomnae-static.s3.ap-northeast-2.amazonaws.com/", "");
+        filePath = URLDecoder.decode(filePath, "UTF-8");
         artworkRepository.deleteById(id);
-
+        return filePath;
     }
 
 }

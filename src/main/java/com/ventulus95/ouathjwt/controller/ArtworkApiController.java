@@ -9,10 +9,11 @@ import com.ventulus95.ouathjwt.security.UserPrincipal;
 import com.ventulus95.ouathjwt.service.artwork.ArtworkService;
 import com.ventulus95.ouathjwt.service.upload.S3Service;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -38,17 +39,19 @@ public class ArtworkApiController {
         return artworkService.findAllGen();
     }
 
-    @PostAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
     public Long save(ArtworkSaveRequestDto dto, @CurrentUser UserPrincipal user) throws IOException {
-        String imgpath  = s3Service.upload(dto.getFile());
+        String imgpath  = s3Service.upload(dto.getFilePath(), dto.getFile());
         dto.setFilePath(imgpath);
         return artworkService.save(dto, user);
     }
 
-    @PostAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public Long update(@PathVariable Long id, @RequestBody ArtworkUpadteRequestDto dto ){
+    public Long update(@PathVariable Long id, ArtworkUpadteRequestDto dto ) throws IOException {
+        String imgpath  = s3Service.upload(dto.getFilePath(), dto.getFile());
+        dto.setFilePath(imgpath);
         return artworkService.update(id, dto);
     }
 
@@ -57,10 +60,11 @@ public class ArtworkApiController {
         return artworkService.findById(id);
     }
 
-    @PostAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public Long artworkDelete(@PathVariable Long id){
-        artworkService.delete(id);
+    public Long artworkDelete(@PathVariable Long id) throws UnsupportedEncodingException {
+        String filePath = artworkService.delete(id);
+        s3Service.deleteFile(filePath);
         return id;
     }
 }

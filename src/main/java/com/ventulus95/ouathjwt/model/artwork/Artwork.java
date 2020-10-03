@@ -52,9 +52,12 @@ public class Artwork extends BaseTimeEntity {
         this.format = format;
     }
 
-    public void update(String title, String content, String filePath){
+    public void update(String title, String content, String filePath, String artist, int generation, String format){
         this.title = title;
         this.content = content;
         this.filePath = filePath;
+        this.artist = artist;
+        this.generation = generation;
+        this.format = format;
     }
 }

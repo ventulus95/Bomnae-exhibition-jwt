@@ -109,7 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js",
                         "/h2-console/*")
                         .permitAll()
-                    .antMatchers("/auth/**", "/oauth2/**")
+                    .antMatchers("/auth/**", "/oauth2/**", "/guestbook-list", "/api/v1/artwork/**")
                         .permitAll()
                     .antMatchers("/admin/**")
                         .hasRole("ADMIN")

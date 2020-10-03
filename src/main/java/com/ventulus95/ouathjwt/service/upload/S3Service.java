@@ -1,5 +1,7 @@
 package com.ventulus95.ouathjwt.service.upload;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -14,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 @NoArgsConstructor
@@ -42,11 +46,27 @@ public class S3Service {
                 .build();
     }
 
-    public String upload(MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
+    public String upload(String currentFilePath, MultipartFile file) throws IOException {
+        SimpleDateFormat date = new SimpleDateFormat("yyyymmddHHmmss");
+        String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
 
+        if (!"".equals(currentFilePath) && currentFilePath != null) {
+            boolean isExistObject = s3.doesObjectExist(bucket, currentFilePath);
+            if (isExistObject) {
+                s3.deleteObject(bucket, currentFilePath);
+            }
+        }
         s3.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return s3.getUrl(bucket, fileName).toString();
+    }
+
+    public void deleteFile(String filePath) throws AmazonServiceException {
+        try{
+            s3.deleteObject(bucket, filePath);
+        }
+        catch (AmazonServiceException e){
+            e.printStackTrace();
+        }
     }
 }
