@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -56,7 +57,9 @@ public class S3Service {
                 s3.deleteObject(bucket, currentFilePath);
             }
         }
-        s3.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
+        LocalDate date1 = LocalDate.now();
+        String folderString = date1.getYear()+"/"+date1.getMonthValue()+"/"+date1.getDayOfMonth()+"/";
+        s3.putObject(new PutObjectRequest(bucket, folderString+fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return s3.getUrl(bucket, fileName).toString();
     }

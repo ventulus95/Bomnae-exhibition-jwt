@@ -35,6 +35,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-validation'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
 	compile("org.mariadb.jdbc:mariadb-java-client")
+	compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.11.0'
 }
 
 test {

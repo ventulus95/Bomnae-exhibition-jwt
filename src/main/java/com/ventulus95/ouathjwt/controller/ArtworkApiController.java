@@ -1,5 +1,6 @@
 package com.ventulus95.ouathjwt.controller;
 
+import com.drew.imaging.ImageProcessingException;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkListResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
@@ -41,7 +42,7 @@ public class ArtworkApiController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/")
-    public Long save(ArtworkSaveRequestDto dto, @CurrentUser UserPrincipal user) throws IOException {
+    public Long save(ArtworkSaveRequestDto dto, @CurrentUser UserPrincipal user) throws IOException, ImageProcessingException {
         String imgpath  = s3Service.upload(dto.getFilePath(), dto.getFile());
         dto.setFilePath(imgpath);
         return artworkService.save(dto, user);

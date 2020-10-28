@@ -1,6 +1,8 @@
 package com.ventulus95.ouathjwt.model.artwork;
 
+import com.drew.metadata.Directory;
 import com.ventulus95.ouathjwt.model.BaseTimeEntity;
+import com.ventulus95.ouathjwt.model.exif.Exif;
 import com.ventulus95.ouathjwt.model.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +16,7 @@ import javax.persistence.*;
 public class Artwork extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artwork_id")
     private Long Id;
 
@@ -41,8 +43,12 @@ public class Artwork extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String filePath;
 
+    @OneToOne
+    @JoinColumn(name = "exif_id")
+    private Exif exif;
+
     @Builder
-    public Artwork(String title, String content, User user, String filePath, String artist, int generation, String format){
+    public Artwork(String title, String content, User user, String filePath, String artist, int generation, String format, Exif exif){
         this.title = title;
         this.content = content;
         this.user = user;
@@ -50,14 +56,16 @@ public class Artwork extends BaseTimeEntity {
         this.artist = artist;
         this.generation = generation;
         this.format = format;
+        this.exif = exif;
     }
 
-    public void update(String title, String content, String filePath, String artist, int generation, String format){
+    public void update(String title, String content, String filePath, String artist, int generation, String format, Exif exif){
         this.title = title;
         this.content = content;
         this.filePath = filePath;
         this.artist = artist;
         this.generation = generation;
         this.format = format;
+        this.exif = exif;
     }
 }

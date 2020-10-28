@@ -1,5 +1,6 @@
 package com.ventulus95.ouathjwt.dto.artwork;
 
+import com.ventulus95.ouathjwt.model.exif.Exif;
 import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.artwork.Artwork;
 import lombok.Builder;
@@ -20,10 +21,11 @@ public class ArtworkSaveRequestDto {
     private String format;
     private MultipartFile file;
     private String filePath;
+    private Exif exif;
 
 
     @Builder
-    public ArtworkSaveRequestDto(String title, String content, User user, MultipartFile file, String filePath, String artist, int generation, String format){
+    public ArtworkSaveRequestDto(String title, String content, User user, MultipartFile file, String filePath, String artist, int generation, String format,Exif exif){
         this.title = title;
         this.content = content;
         this.user = user;
@@ -32,6 +34,7 @@ public class ArtworkSaveRequestDto {
         this.artist = artist;
         this.generation = generation;
         this.format = format;
+        this.exif = exif;
     }
 
     public Artwork toEntity(){
@@ -43,6 +46,7 @@ public class ArtworkSaveRequestDto {
                 .artist(artist)
                 .generation(generation)
                 .format(format)
+                .exif(exif)
                 .build();
     }
 }

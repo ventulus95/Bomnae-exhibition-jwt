@@ -1,5 +1,6 @@
 package com.ventulus95.ouathjwt.dto.artwork;
 
+import com.ventulus95.ouathjwt.model.exif.Exif;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,10 @@ public class ArtworkUpadteRequestDto {
     private String format;
     private MultipartFile file;
     private String filePath;
+    private Exif exif;
 
     @Builder
-    public ArtworkUpadteRequestDto(String title, String content, MultipartFile file, String filePath, String artist, int generation, String format){
+    public ArtworkUpadteRequestDto(String title, String content, MultipartFile file, String filePath, String artist, int generation, String format, Exif exif){
         this.title = title;
         this.content = content;
         this.file = file;
@@ -28,5 +30,6 @@ public class ArtworkUpadteRequestDto {
         this.artist = artist;
         this.generation = generation;
         this.format = format;
+        this.exif = exif;
     }
 }
