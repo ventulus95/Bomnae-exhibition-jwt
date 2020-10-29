@@ -24,27 +24,27 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class OuathJwtApplicationTests {
 
-	@Autowired
-	S3Service s3Service;
-
-	MockMultipartFile mockMultipartFile;
-
-	@Test
-	void kkk() throws UnsupportedEncodingException {
-		String filePath = "https://bomnae-static.s3.ap-northeast-2.amazonaws.com/myplot.png  ";
-		filePath=filePath.replace("https://bomnae-static.s3.ap-northeast-2.amazonaws.com/", "");
-		filePath = URLDecoder.decode(filePath,"UTF-8");
-		System.out.println(filePath);
-		s3Service.deleteFile(filePath);
-	}
-
-	@Test
-	public void  S3_폴더_업로드() throws IOException {
-		ArtworkSaveRequestDto a = new ArtworkSaveRequestDto();
-		MockMultipartFile firstFile = new MockMultipartFile("testPhoto", "filename.txt", "text/plain", "some xml".getBytes());
-		a.setFile(firstFile);
-		s3Service.upload(a.getFilePath(), a.getFile());
-	}
+//	@Autowired
+//	S3Service s3Service;
+//
+//	MockMultipartFile mockMultipartFile;
+//
+//	@Test
+//	void kkk() throws UnsupportedEncodingException {
+//		String filePath = "https://bomnae-static.s3.ap-northeast-2.amazonaws.com/myplot.png  ";
+//		filePath=filePath.replace("https://bomnae-static.s3.ap-northeast-2.amazonaws.com/", "");
+//		filePath = URLDecoder.decode(filePath,"UTF-8");
+//		System.out.println(filePath);
+//		s3Service.deleteFile(filePath);
+//	}
+//
+//	@Test
+//	public void  S3_폴더_업로드() throws IOException {
+//		ArtworkSaveRequestDto a = new ArtworkSaveRequestDto();
+//		MockMultipartFile firstFile = new MockMultipartFile("testPhoto", "filename.txt", "text/plain", "some xml".getBytes());
+//		a.setFile(firstFile);
+//		s3Service.upload(a.getFilePath(), a.getFile());
+//	}
 
 	@Test
 	public void 메타데이터_확인() throws ImageProcessingException, IOException {
