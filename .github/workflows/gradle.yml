@@ -49,13 +49,13 @@ jobs:
         ./springboot-intro-build.zip s3://bomnae-deploy/
 
     - name: AWS CodeDeploy에 배포 작업
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOY_ACCESS_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOY_SECRET }}
-        run: |
-          aws deploy create-deployment \
-          --application-name Spring-boot-Bomnae \
-          --deployment-group-name BomnaeDeployGroup \
-          --file-exists-behavior OVERWRITE \
-          --s3-location bucket=bomnae-deploy,bundleType=zip,key=springboot-intro-build.zip \
-          --region ap-northeast-2
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOY_ACCESS_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOY_SECRET }}
+      run: |
+        aws deploy create-deployment \
+        --application-name Spring-boot-Bomnae \
+        --deployment-group-name BomnaeDeployGroup \
+        --file-exists-behavior OVERWRITE \
+        --s3-location bucket=bomnae-deploy,bundleType=zip,key=springboot-intro-build.zip \
+        --region ap-northeast-2
