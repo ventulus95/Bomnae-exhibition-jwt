@@ -13,7 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: ${{secrets.LOCAL}}
+    env:
+      accesskey: ${{secrets.accesskey}}
+      secretkey: ${{secrets.secretkey}}
 
     steps:
     - uses: actions/checkout@v2

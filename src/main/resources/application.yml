@@ -3,7 +3,7 @@ spring:
     livereload:
       enabled: true
   profiles:
-    active: local
+    active: action
   jackson:
     serialization:
         fail-on-empty-beans: false

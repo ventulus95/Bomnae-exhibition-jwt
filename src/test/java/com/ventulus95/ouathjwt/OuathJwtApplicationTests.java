@@ -6,11 +6,14 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.ventulus95.ouathjwt.controller.GuestbookController;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
 import com.ventulus95.ouathjwt.service.upload.S3Service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mock.web.MockMultipartFile;
 
@@ -21,30 +24,30 @@ import java.net.URLDecoder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = S3Service.class)
 class OuathJwtApplicationTests {
 
-//	@Autowired
-//	S3Service s3Service;
-//
-//	MockMultipartFile mockMultipartFile;
-//
-//	@Test
-//	void kkk() throws UnsupportedEncodingException {
-//		String filePath = "https://bomnae-static.s3.ap-northeast-2.amazonaws.com/myplot.png  ";
-//		filePath=filePath.replace("https://bomnae-static.s3.ap-northeast-2.amazonaws.com/", "");
-//		filePath = URLDecoder.decode(filePath,"UTF-8");
-//		System.out.println(filePath);
-//		s3Service.deleteFile(filePath);
-//	}
-//
-//	@Test
-//	public void  S3_폴더_업로드() throws IOException {
-//		ArtworkSaveRequestDto a = new ArtworkSaveRequestDto();
-//		MockMultipartFile firstFile = new MockMultipartFile("testPhoto", "filename.txt", "text/plain", "some xml".getBytes());
-//		a.setFile(firstFile);
-//		s3Service.upload(a.getFilePath(), a.getFile());
-//	}
+	@Autowired
+	S3Service s3Service;
+
+
+	@Test
+	void kkk() throws UnsupportedEncodingException {
+		String filePath = "https://bomnae-static.s3.ap-northeast-2.amazonaws.com/myplot.png  ";
+		filePath=filePath.replace("https://bomnae-static.s3.ap-northeast-2.amazonaws.com/", "");
+		filePath = URLDecoder.decode(filePath,"UTF-8");
+		System.out.println(filePath);
+		s3Service.deleteFile(filePath);
+	}
+
+	@Test
+	public void  S3_폴더_업로드() throws IOException {
+		ArtworkSaveRequestDto a = new ArtworkSaveRequestDto();
+		MockMultipartFile firstFile = new MockMultipartFile("testPhoto", "filename.txt", "text/plain", "some xml".getBytes());
+		a.setFile(firstFile);
+		s3Service.upload(a.getFilePath(), a.getFile());
+	}
+
 
 	@Test
 	public void 메타데이터_확인() throws ImageProcessingException, IOException {

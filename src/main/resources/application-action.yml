@@ -1,0 +1,25 @@
+spring:
+  profiles: action
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  h2:
+    console:
+      enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${accesskey}
+      secret-key: ${secretkey}
+    s3:
+      bucket: bomnae-static
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
