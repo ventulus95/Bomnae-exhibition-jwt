@@ -2,11 +2,14 @@ package com.ventulus95.ouathjwt.model.exif;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@NoArgsConstructor
+@Getter
 public class Exif {
 
     @Id
