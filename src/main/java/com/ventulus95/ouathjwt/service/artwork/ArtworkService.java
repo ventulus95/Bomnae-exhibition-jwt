@@ -66,8 +66,22 @@ public class ArtworkService {
     }
 
     @Transactional(readOnly = true)
+    public List<ArtworkListResponseDto> findAllFormatByName(String name){
+        return artworkRepository.findAllByFormatContains(name).stream()
+                .map(ArtworkListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<ArtworkListResponseDto> findAllGen(){
         return artworkRepository.findAllByOrderByGeneration().stream()
+                .map(ArtworkListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ArtworkListResponseDto> findAllGenById(Integer id){
+        return artworkRepository.findAllByGeneration(id).stream()
                 .map(ArtworkListResponseDto::new)
                 .collect(Collectors.toList());
     }

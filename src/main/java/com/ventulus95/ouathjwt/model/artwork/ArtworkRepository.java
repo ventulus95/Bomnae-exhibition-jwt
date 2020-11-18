@@ -11,10 +11,14 @@ import java.util.List;
 @Repository
 public interface ArtworkRepository extends JpaRepository<Artwork, Long> {
 
-    @Query(value = "SELECT * FROM artwork ORDER BY RANDOM()", nativeQuery = true)
+    @Query(value = "SELECT * FROM artwork ORDER BY RAND()", nativeQuery = true)
     List<Artwork> findAllByAOrderByRandom();
 
     List<Artwork> findAllByOrderByGeneration();
 
     List<Artwork> findAllByOrderByFormat();
+
+    List<Artwork> findAllByGeneration(Integer gen);
+
+    List<Artwork> findAllByFormatContains(String format);
 }

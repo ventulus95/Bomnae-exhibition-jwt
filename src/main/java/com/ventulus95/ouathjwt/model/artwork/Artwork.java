@@ -43,7 +43,7 @@ public class Artwork extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String filePath;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exif_id")
     private Exif exif;
 

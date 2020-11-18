@@ -6,14 +6,11 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
-import com.ventulus95.ouathjwt.controller.GuestbookController;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
 import com.ventulus95.ouathjwt.service.upload.S3Service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mock.web.MockMultipartFile;
 
@@ -22,7 +19,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = S3Service.class)
 class OuathJwtApplicationTests {
@@ -52,7 +49,7 @@ class OuathJwtApplicationTests {
 	@Test
 	public void 메타데이터_확인() throws ImageProcessingException, IOException {
 		File file = new ClassPathResource("/testPhoto/NikonE990.jpg").getFile();
-		Metadata metadata = ImageMetadataReader.readMetadata(file);
+			Metadata metadata = ImageMetadataReader.readMetadata(file);
 		Directory directory1 = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
 		assertEquals("3.5", directory1.getString(ExifSubIFDDirectory.TAG_MAX_APERTURE));
 		for (Directory directory : metadata.getDirectories()) {

@@ -35,9 +35,19 @@ public class ArtworkApiController {
         return artworkService.findAllFormat();
     }
 
+    @GetMapping("/format/{name}")
+    public List<ArtworkListResponseDto> ListArtworkByFormat(@PathVariable String name){
+        return artworkService.findAllFormatByName(name);
+    }
+
     @GetMapping("/gen")
     public List<ArtworkListResponseDto> ListGeneration(){
         return artworkService.findAllGen();
+    }
+
+    @GetMapping("/gen/{id}")
+    public List<ArtworkListResponseDto> ListGenerationID(@PathVariable Integer id){
+        return artworkService.findAllGenById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -68,4 +78,6 @@ public class ArtworkApiController {
         s3Service.deleteFile(filePath);
         return id;
     }
+
+
 }

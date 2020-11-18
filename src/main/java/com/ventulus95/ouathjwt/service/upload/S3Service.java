@@ -23,6 +23,8 @@ import java.util.Date;
 @Service
 @NoArgsConstructor
 public class S3Service {
+    public static final String CLOUD_FRONT_DOMAIN_NAME = "http://d27agkqmyp7m6k.cloudfront.net/";
+
     private AmazonS3 s3;
 
     @Value("${cloud.aws.credentials.access-key}")
@@ -49,7 +51,8 @@ public class S3Service {
 
     public String upload(String currentFilePath, MultipartFile file) throws IOException {
         SimpleDateFormat date = new SimpleDateFormat("yyyymmddHHmmss");
-        String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
+        LocalDate localDate = LocalDate.now();
+        String fileName = localDate.getYear()+"/"+localDate.getMonthValue()+"/"+localDate.getDayOfMonth()+"/"+file.getOriginalFilename() + "-" + date.format(new Date());
 
         if (!"".equals(currentFilePath) && currentFilePath != null) {
             boolean isExistObject = s3.doesObjectExist(bucket, currentFilePath);
@@ -57,11 +60,9 @@ public class S3Service {
                 s3.deleteObject(bucket, currentFilePath);
             }
         }
-        LocalDate date1 = LocalDate.now();
-        String folderString = date1.getYear()+"/"+date1.getMonthValue()+"/"+date1.getDayOfMonth()+"/";
-        s3.putObject(new PutObjectRequest(bucket, folderString+fileName, file.getInputStream(), null)
+        s3.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
-        return s3.getUrl(bucket, fileName).toString();
+        return CLOUD_FRONT_DOMAIN_NAME+fileName;
     }
 
     public void deleteFile(String filePath) throws AmazonServiceException {
