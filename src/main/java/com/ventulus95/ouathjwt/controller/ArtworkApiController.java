@@ -67,7 +67,7 @@ public class ArtworkApiController {
     }
 
     @GetMapping("/{id}")
-    public ArtworkResponseDto findById(@PathVariable Long id, @CurrentUser UserPrincipal user){
+    public ArtworkResponseDto findById(@PathVariable Long id){
         return artworkService.findById(id);
     }
 

@@ -9,17 +9,15 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.ventulus95.ouathjwt.model.exif.Exif;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Optional;
 
 public class ExifUtil {
 
     public static Exif imgtoExif(MultipartFile file) throws IOException, ImageProcessingException {
-        InputStream inputStream = new BufferedInputStream(file.getInputStream());
         Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
-        Directory SubDirectory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-        Directory IFD0Directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+        Directory SubDirectory = Optional.of(metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class)).orElse(new ExifSubIFDDirectory());
+        Directory IFD0Directory = Optional.of(metadata.getFirstDirectoryOfType(ExifIFD0Directory.class)).orElse(new ExifIFD0Directory());
         String fnum = SubDirectory.getString(ExifSubIFDDirectory.TAG_FNUMBER);
         String fl = SubDirectory.getString(ExifSubIFDDirectory.TAG_FOCAL_LENGTH);
         String iso = SubDirectory.getString(ExifSubIFDDirectory.TAG_ISO_EQUIVALENT);
