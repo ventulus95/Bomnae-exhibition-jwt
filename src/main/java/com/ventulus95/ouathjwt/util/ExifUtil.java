@@ -16,8 +16,8 @@ public class ExifUtil {
 
     public static Exif imgtoExif(MultipartFile file) throws IOException, ImageProcessingException {
         Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
-        Directory SubDirectory = Optional.of(metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class)).orElse(new ExifSubIFDDirectory());
-        Directory IFD0Directory = Optional.of(metadata.getFirstDirectoryOfType(ExifIFD0Directory.class)).orElse(new ExifIFD0Directory());
+        Directory SubDirectory = Optional.ofNullable(metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class)).orElse(new ExifSubIFDDirectory());
+        Directory IFD0Directory = Optional.ofNullable(metadata.getFirstDirectoryOfType(ExifIFD0Directory.class)).orElse(new ExifIFD0Directory());
         String fnum = SubDirectory.getString(ExifSubIFDDirectory.TAG_FNUMBER);
         String fl = SubDirectory.getString(ExifSubIFDDirectory.TAG_FOCAL_LENGTH);
         String iso = SubDirectory.getString(ExifSubIFDDirectory.TAG_ISO_EQUIVALENT);

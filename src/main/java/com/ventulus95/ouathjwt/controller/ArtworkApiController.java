@@ -10,9 +10,11 @@ import com.ventulus95.ouathjwt.security.UserPrincipal;
 import com.ventulus95.ouathjwt.service.artwork.ArtworkService;
 import com.ventulus95.ouathjwt.service.upload.S3Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -59,11 +61,9 @@ public class ArtworkApiController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
-    public Long update(@PathVariable Long id, ArtworkUpadteRequestDto dto ) throws IOException {
-        String imgpath  = s3Service.upload(dto.getFilePath(), dto.getFile());
-        dto.setFilePath(imgpath);
-        return artworkService.update(id, dto);
+    @PostMapping(value = "/{id}")
+    public Long update(@PathVariable Long id, @RequestBody ArtworkUpadteRequestDto dto ) throws IOException {
+            return artworkService.update(id, dto);
     }
 
     @GetMapping("/{id}")

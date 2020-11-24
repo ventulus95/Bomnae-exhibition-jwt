@@ -17,16 +17,12 @@ public class ArtworkUpadteRequestDto {
     private String artist;
     private int generation;
     private String format;
-    private MultipartFile file;
-    private String filePath;
     private Exif exif;
 
     @Builder
-    public ArtworkUpadteRequestDto(String title, String content, MultipartFile file, String filePath, String artist, int generation, String format, Exif exif){
+    public ArtworkUpadteRequestDto(String title, String content, String artist, int generation, String format, Exif exif){
         this.title = title;
         this.content = content;
-        this.file = file;
-        this.filePath = filePath;
         this.artist = artist;
         this.generation = generation;
         this.format = format;

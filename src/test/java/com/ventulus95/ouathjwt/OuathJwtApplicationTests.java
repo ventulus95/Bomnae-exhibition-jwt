@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = S3Service.class)
 class OuathJwtApplicationTests {
@@ -48,10 +50,10 @@ class OuathJwtApplicationTests {
 
 	@Test
 	public void 메타데이터_확인() throws ImageProcessingException, IOException {
-		File file = new ClassPathResource("/testPhoto/NikonE990.jpg").getFile();
+		File file = new ClassPathResource("/testPhoto/KakaoTalk_Photo_2020-11-24-14-31-39.jpeg").getFile();
 			Metadata metadata = ImageMetadataReader.readMetadata(file);
-		Directory directory1 = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-		assertEquals("3.5", directory1.getString(ExifSubIFDDirectory.TAG_MAX_APERTURE));
+		Directory directory1 = Optional.ofNullable(metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class)).orElse(new ExifSubIFDDirectory());
+		assertNull(directory1.getString(ExifSubIFDDirectory.TAG_MAX_APERTURE));
 		for (Directory directory : metadata.getDirectories()) {
 			for (Tag tag : directory.getTags()) {
 				System.out.println(tag);

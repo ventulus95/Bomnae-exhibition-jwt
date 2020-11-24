@@ -59,13 +59,11 @@ public class Artwork extends BaseTimeEntity {
         this.exif = exif;
     }
 
-    public void update(String title, String content, String filePath, String artist, int generation, String format, Exif exif){
+    public void update(String title, String content, String artist, int generation, String format){
         this.title = title;
         this.content = content;
-        this.filePath = filePath;
         this.artist = artist;
         this.generation = generation;
         this.format = format;
-        this.exif = exif;
     }
 }

@@ -5,6 +5,7 @@ import com.ventulus95.ouathjwt.dto.artwork.ArtworkListResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkResponseDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkSaveRequestDto;
 import com.ventulus95.ouathjwt.dto.artwork.ArtworkUpadteRequestDto;
+import com.ventulus95.ouathjwt.model.exif.Exif;
 import com.ventulus95.ouathjwt.model.exif.ExifRepository;
 import com.ventulus95.ouathjwt.model.user.User;
 import com.ventulus95.ouathjwt.model.artwork.Artwork;
@@ -42,7 +43,10 @@ public class ArtworkService {
     @Transactional
     public Long update(Long id, ArtworkUpadteRequestDto dto) {
         Artwork artwork = artworkRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 없습니다. id ="+id));
-        artwork.update(dto.getTitle(), dto.getContent(), dto.getFilePath(), dto.getArtist(), dto.getGeneration(), dto.getFormat(), dto.getExif());
+        Exif exif = exifRepository.findById(dto.getExif().getId()).orElseThrow(() -> new IllegalArgumentException("해당 EXIF가 없습니다. id="+dto.getExif().getId()));
+        Exif updateExif = dto.getExif();
+        exif.update(updateExif.getAperture(), updateExif.getFocusLength(), updateExif.getIso(), updateExif.getExposureTime(), updateExif.getModel(), updateExif.getMaker());
+        artwork.update(dto.getTitle(), dto.getContent(), dto.getArtist(), dto.getGeneration(), dto.getFormat());
         return id;
     }
 

@@ -1,7 +1,6 @@
 package com.ventulus95.ouathjwt.model.exif;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,10 +29,10 @@ public class Exif {
     private String exposureTime;
 
     @Column
-    private String Model;
+    private String model;
 
     @Column
-    private String Maker;
+    private String maker;
 
     @Builder
     public Exif(String aperture, String focusLength, String iso, String exposureTime, String model, String maker){
@@ -41,8 +40,18 @@ public class Exif {
         this.focusLength = focusLength;
         this.iso = iso;
         this.exposureTime = exposureTime;
-        this.Maker = maker;
-        this.Model = model;
+        this.maker = maker;
+        this.model = model;
     }
+
+    public void update(String aperture, String focusLength, String iso, String exposureTime, String model, String maker){
+        this.aperture = aperture;
+        this.focusLength = focusLength;
+        this.iso = iso;
+        this.exposureTime = exposureTime;
+        this.maker = maker;
+        this.model = model;
+    }
+
 
 }
