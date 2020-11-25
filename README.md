@@ -14,7 +14,7 @@
 *  [Getting Started](#getting-started)
 * [Details](#details)
   * [Dependencies](#Dependencies)
-  * [Description&Architecture](#architecture)
+  * [Description&Architecture](#description--architecture)
   * [Demo](#demo)
 * [결과](#결과)
 * [Contributers](#Contributers)
