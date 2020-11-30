@@ -10,4 +10,12 @@ spring:
   servlet:
     multipart:
       max-file-size: 500MB
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:9999
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

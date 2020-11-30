@@ -1,7 +1,7 @@
 package com.ventulus95.ouathjwt.config;
 
-import com.ventulus95.ouathjwt.service.CustomUserDetailsService;
 import com.ventulus95.ouathjwt.security.*;
+import com.ventulus95.ouathjwt.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,7 +107,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
-                        "/h2-console/*")
+                        "/h2-console/*",
+                        "/actuator/**"
+                            )
                         .permitAll()
                     .antMatchers("/auth/**", "/oauth2/**", "/guestbook-list", "/api/v1/artwork/**")
                         .permitAll()
