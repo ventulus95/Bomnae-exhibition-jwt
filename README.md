@@ -14,6 +14,7 @@
 *  [Getting Started](#getting-started)
 * [Details](#details)
   * [Dependencies](#Dependencies)
+  * [Profile](#Profile)
   * [Description&Architecture](#description--architecture)
   * [Demo](#demo)
 * [결과](#결과)
@@ -105,6 +106,120 @@ test {
 ```
 
  &nbsp;
+ 
+### Profile
+
+application.yml은 이렇게 설정되어있습니다. spring.profile.active을 설정하면 옵션없이 실행시키면 그 기본 Profile로 
+실행됩니다. 저의 경우 github-action을 통한 build 작업을 하기때문에 기본을 action으로 설정했습니다.
+```
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  profiles:
+    active: action
+  jackson:
+    serialization:
+        fail-on-empty-beans: false
+  servlet:
+    multipart:
+      max-file-size: 500MB
+```
+
+profile을 적용하기위해서는 다음과 같은 양식을 사용합니다. 
+application-profile이름.yml ex) application-dev.yml 이런식으로 구성하면 됩니다. 
+아래는 개발자 설정을 가져왔습니다. 실제 프로덕션에서 사용하는 중요한 정보들을 가지고 있는 Profile 입니다.
+
+```
+spring:
+  profiles: dev -> 다음과 같이 DEV를 이용해서 Profiles의 이름을 지정합니다. 
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  h2:
+    console:
+      enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+      url: DB주소
+      username: DB 유저 이름
+      password: DB 유저 비밀번호
+      driver-class-name: org.mariadb.jdbc.Driver
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 구글 client-id
+            client-secret: 구글 client-secret키
+            scope: email, profile
+          kakao:
+            client-id: 카카오 client-id
+            client-secret: 카카오 client-secret키
+            redirectUri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            authorization-grant-type: authorization_code
+            scope: profile,account_email
+            client-name: kakao
+            clientAuthenticationMethod: post
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+app:
+  auth:
+    tokenSecret: 토큰시크릿키
+    tokenExpirationMsec: 토큰만료시간
+  oauth2:
+    authorizedRedirectUris: http://localhost:3000/oauth2/redirect
+
+cloud:
+  aws:
+    credentials:
+      access-key: AWS 키
+      secret-key: AWS 시크릿 키
+    s3:
+      bucket: S3 버켓이름
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+```
+
+application-action을 통해서 CI를 설정할 수 있습니다. github repository의 설정에서 secret키를 통해    중요정보를 숨길 수 있습니다.    
+ 
+```
+spring:
+  profiles: action
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  h2:
+    console:
+      enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${accesskey}
+      secret-key: ${secretkey}
+    s3:
+      bucket: S3 버킷 이름
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+```
+### 실행시 권고사항
+`-DSpring.profiles.active=dev`를 통해 profile을 java 실행시 변경할 수도 있습니다.
 
 ### Description & Architecture
 
