@@ -247,7 +247,8 @@ https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/
 
 ## 결과
 
-12/1월 이후 안정적 서비스가 가능하였는지 적도록 하겠습니다. 
+[온라인 사진전을 개최하며 겪었던 후일담 -1편](https://sundries-in-myidea.tistory.com/107)        
+[온라인 사진전을 개최하며 겪었던 후일담 -2편](https://sundries-in-myidea.tistory.com/108)        
 
 
 
