@@ -106,7 +106,7 @@ test {
 ```
 
  &nbsp;
- 
+
 ### Profile
 
 application.yml은 이렇게 설정되어있습니다. spring.profile.active을 설정하면 옵션없이 실행시키면 그 기본 Profile로 
@@ -191,7 +191,7 @@ cloud:
 ```
 
 application-action을 통해서 CI를 설정할 수 있습니다. github repository의 설정에서 secret키를 통해    중요정보를 숨길 수 있습니다.    
- 
+
 ```
 spring:
   profiles: action
@@ -241,9 +241,21 @@ https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/
 
 ### Demo
 
-<br>
+1. 사진 전시 기능. 사진 전시와 사진에 대한 여러가지 정보들을 같이 노출합니다. 사진의 제목, 작가명, 사진 설명, 사진 메타데이터들을 자동으로 노출시켜줍니다.
 
+![](/README_Resource/기본기능.gif)
 
+2. 방명록 기능 소셜로그인을 통해서 로그인한 유저이름과 소셜로그인 사진으로 방명록 작성을 할 수 있습니다. 
+
+![](/README_Resource/방명록.gif)
+
+3. 소셜로그인 기능: 구글과 카카오를 통한 소셜로그인 기능이 있습니다.
+
+![](/README_Resource/소셜로그인.gif)
+
+더 자세한 시연영상은 아래 링크를 참조 해주세요.
+
+[유튜브 링크](https://youtu.be/B1tVjYM6_NY)
 
 ## 결과
 
